@@ -15,6 +15,7 @@ class CreatePostagemsTable extends Migration
     {
         Schema::create('postagems', function (Blueprint $table) {
             $table->increments('id');
+            $table->foreign('tema_id')->references('id')->on('temas');
             $table->timestamps();
         });
     }

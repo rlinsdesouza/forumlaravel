@@ -15,7 +15,11 @@ class CreatePostagemsTable extends Migration
     {
         Schema::create('postagems', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('descricao');
+            $table->integer('likes');
+            $table->integer('dislikes');
             $table->foreign('tema_id')->references('id')->on('temas');
+            $table->foreign('user_id')->references('id')->on('users');                       
             $table->timestamps();
         });
     }

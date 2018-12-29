@@ -15,7 +15,9 @@ class CreateTemasTable extends Migration
     {
         Schema::create('temas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('descricao');
+            $table->string('titulotema');
+            $table->text('descricaotema');
+            $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
@@ -30,4 +32,5 @@ class CreateTemasTable extends Migration
     {
         Schema::dropIfExists('temas');
     }
+
 }

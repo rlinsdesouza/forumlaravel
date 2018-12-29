@@ -15,10 +15,13 @@ class CreatePostagemsTable extends Migration
     {
         Schema::create('postagems', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('descricao');
+            $table->string('titulopost');
+            $table->text('descricaopost');
             $table->integer('likes');
             $table->integer('dislikes');
+            $table->integer('tema_id')->unsigned();
             $table->foreign('tema_id')->references('id')->on('temas');
+            $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');                       
             $table->timestamps();
         });

@@ -13,6 +13,13 @@ use Faker\Generator as Faker;
 |
 */
 
+/*
+    Referencia utilizada para o Faker
+    https://github.com/fzaninotto/Faker
+
+
+*/
+
 $factory->define(forum\User::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
@@ -20,5 +27,35 @@ $factory->define(forum\User::class, function (Faker $faker) {
         'email_verified_at' => now(),
         'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
         'remember_token' => str_random(10),
+    ];
+});
+
+$factory->define(forum\Models\Tema::class, function (Faker $faker) {
+    return [
+        'titulotema' => $faker->sentence,
+        'descricaotema' => $faker->paragraph,
+        'user_id' => forum\User::all()->random()->id,
+    ];
+});
+
+$factory->define(forum\Models\Postagem::class, function (Faker $faker) {
+    return [
+        'titulopost'=>$faker->sentence,
+        'descricaopost'=>$faker->paragraph,
+        'likes'=>$faker->randomDigit,
+        'dislikes'=>$faker->randomDigit,
+        'tema_id'=>forum\Models\Tema::all()->random()->id,
+        'user_id'=>forum\User::all()->random()->id,
+    ];
+});
+
+$factory->define(forum\Models\Resposta::class, function (Faker $faker) {
+    return [
+        'resposta'=>$faker->paragraph,
+        'likes'=>$faker->randomDigit,
+        'dislikes'=>$faker->randomDigit,
+        'user_id'=>forum\User::all()->random()->id,
+        'postagem_id'=>forum\Models\Postagem::all()->random()->id,
+        'resposta_mae_id'=>null,
     ];
 });

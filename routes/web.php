@@ -11,8 +11,6 @@
 |
 */
 
-Route::get('/index', 'HomeController@home');
-
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
@@ -24,3 +22,9 @@ Route::resource('postagems','PostagemController');
 Route::resource('respostas','RespostaController');
 
 Route::get('/users/{id}/postagens','PostagemController@postagems');
+
+
+Route::get('/postagens/listargeral','PostagemController@listageral');
+Route::get('/postagens/{id}',function () {
+    return 'testando';
+});

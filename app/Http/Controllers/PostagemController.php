@@ -4,6 +4,9 @@ namespace forum\Http\Controllers;
 
 use forum\Models\Postagem;
 use Illuminate\Http\Request;
+use forum\User;
+use forum\Models\Tema;
+
 
 class PostagemController extends Controller
 {
@@ -81,5 +84,13 @@ class PostagemController extends Controller
     public function destroy(Postagem $postagem)
     {
         //
+    }
+
+    public function listageral () {
+        $postagems = Postagem::all();
+        $users = User::all();
+        $temas = Tema::all();
+
+        return view ('pages/listposts',compact('postagems','users','temas'));
     }
 }

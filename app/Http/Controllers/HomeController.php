@@ -26,14 +26,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
-    }
-
-    public function home () {
-        $postagems = Postagem::all();
+        $postagems = Postagem::orderBy('created_at','desc')->take(5)->get();
         $users = User::all();
         $temas = Tema::all();
+        $postagemsMaisInteressantes = Postagem::orderBy('likes','desc')->take(5)->get();
 
-        return view ('pages/index',compact('postagems','users','temas'));
+        return view ('pages/index',compact('postagems','users','temas','postagemsMaisInteressantes'));
     }
 }

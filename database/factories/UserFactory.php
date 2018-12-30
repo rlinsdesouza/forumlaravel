@@ -55,7 +55,11 @@ $factory->define(forum\Models\Resposta::class, function (Faker $faker) {
         'likes'=>$faker->randomDigit,
         'dislikes'=>$faker->randomDigit,
         'user_id'=>forum\User::all()->random()->id,
-        'postagem_id'=>forum\Models\Postagem::all()->random()->id,
-        'resposta_mae_id'=>null,
+        'resposta_mae_id'=>$faker->randomDigit,
+        'resposta_mae_type'=>function () {
+            $input = ['forum\Postagem', 'forum\Models\Resposta'];
+            $model = $input[mt_rand(0,count($input)-1)];
+            return $model;
+        }
     ];
 });

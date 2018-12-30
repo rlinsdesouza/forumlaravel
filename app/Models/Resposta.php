@@ -7,15 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 class Resposta extends Model
 {
     //
-    public function postagem () {
-        return $this->belongsTo('forum\Models\Postagem');
+
+    /*
+    https://laravel.com/docs/5.7/eloquent-relationships#one-to-one-polymorphic-relations
+    */
+
+    public function respostavel () {
+        return $this->morphTo();
     }
 
-    public function resposta () {
-        return $this->belongsTo('forum\Models\Resposta');
+    public function user () {
+        return $this->belongsTo('forum\User');
     }
 
     public function respostas () {
-        return $this->hasMany('forum\Models\Resposta');
+        return $this->morphMany('forum\Models\Resposta','respostavel');
     }
 }

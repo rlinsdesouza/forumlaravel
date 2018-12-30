@@ -17,6 +17,6 @@ class Postagem extends Model
     }
 
     public function respostas () {
-        return $this->hasMany('forum\Models\Resposta');
+        return $this->morphMany('forum\Models\Resposta','respostavel');
     }
 }

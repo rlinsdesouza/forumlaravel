@@ -11,14 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/index', function () {
-    return view('pages/index');
-});
+Route::get('/index', 'HomeController@home');
 
 Auth::routes();
 
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('users','UserController');
+Route::resource('temas','TemaController');
+Route::resource('postagems','PostagemController');
+Route::resource('respostas','RespostaController');
+
+Route::get('/users/{id}/postagens','PostagemController@postagems');

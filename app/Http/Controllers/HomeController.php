@@ -3,6 +3,9 @@
 namespace forum\Http\Controllers;
 
 use Illuminate\Http\Request;
+use forum\Models\Postagem;
+use forum\User;
+use forum\Models\Tema;
 
 class HomeController extends Controller
 {
@@ -24,5 +27,13 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function home () {
+        $postagems = Postagem::all();
+        $users = User::all();
+        $temas = Tema::all();
+
+        return view ('pages/index',compact('postagems','users','temas'));
     }
 }

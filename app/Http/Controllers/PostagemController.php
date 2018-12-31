@@ -47,9 +47,20 @@ class PostagemController extends Controller
      * @param  \forum\Models\Postagem  $postagem
      * @return \Illuminate\Http\Response
      */
-    public function show(Postagem $postagem)
+    public function show($postagem)
     {
-        //
+        $postagem = Postagem::find($postagem);
+        $respostas = $postagem->respostas;
+        // print_r($respostas->respostas);
+        // try {
+        //     $respostas = Postagem::find($postagem)->respostas;
+        //     return view('pages/post',compact('postagem','respostas'));
+        // } catch (Exception $e) {
+        //     return view('pages/post',compact('postagem'));            
+        // }
+        return view('pages/post',compact('postagem','respostas'));
+        
+        // $respostasdasrespostas =  
     }
 
     /**
@@ -93,4 +104,5 @@ class PostagemController extends Controller
 
         return view ('pages/listposts',compact('postagems','users','temas'));
     }
+
 }

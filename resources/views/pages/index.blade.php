@@ -21,17 +21,19 @@
 
     <div class="my-3 p-3 bg-white rounded shadow-sm">
       <h6 class="border-bottom border-gray pb-2 mb-0">Postagens recentes</h6>
+
       @foreach ($postagems as $postagem)
       <div class="media text-muted pt-3">
         {{-- <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" alt="" class="mr-2 rounded"> --}}
         <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-          <strong class="d-block text-gray-dark">'@'{{$postagem->user->name}}</strong>
+          <strong class="d-block text-gray-dark"><i class="fa fa-user"></i> by {{$postagem->user->name}}</strong>
           <strong class="d-block text-gray-dark">{{$postagem->tema->titulotema}}</strong>
           {{$postagem->titulopost}}
-          <i class="material-icons">thumb_up</i>
+          <i class="fa fa-thumbs-up"></i>
           {{$postagem->likes}} 
-          <i class="material-icons">thumb_down</i>
+          <i class="fa fa-thumbs-down"></i>
           {{$postagem->dislikes}}
+          <i class="fa fa-calendar"></i> Posted on {{$postagem->created_at}}
           <a href="postagens/{{$postagem->id}}">Leia mais</a>            
         </p>
       </div>
@@ -47,13 +49,14 @@
         <div class="media text-muted pt-3">
           {{-- <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" alt="" class="mr-2 rounded"> --}}
           <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-            <strong class="d-block text-gray-dark">'@'{{$post->user->name}}</strong>
+            <strong class="d-block text-gray-dark"><i class="fa fa-user"></i> by {{$post->user->name}}</strong>
             <strong class="d-block text-gray-dark">{{$post->tema->titulotema}}</strong>
             {{$post->titulopost}}
-            <i class="material-icons">thumb_up</i>
+            <i class="fa fa-thumbs-up"></i>
             {{$post->likes}} 
-            <i class="material-icons">thumb_down</i>
+            <i class="fa fa-thumbs-down"></i>
             {{$post->dislikes}}
+            <i class="fa fa-calendar"></i> Posted on {{$post->created_at}}
             <a href="postagens/{{$post->id}}">Leia mais</a>            
           </p>
         </div>

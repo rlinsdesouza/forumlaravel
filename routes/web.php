@@ -21,10 +21,9 @@ Route::resource('temas','TemaController');
 Route::resource('postagems','PostagemController');
 Route::resource('respostas','RespostaController');
 
-Route::get('/users/{id}/postagens','PostagemController@postagems');
+Route::get('/users/{id}/postagens','UserController@postagems');
 
 
 Route::get('/postagens/listargeral','PostagemController@listageral');
-Route::get('/postagens/{id}',function () {
-    return 'testando';
-});
+Route::get('/postagens/{id}','PostagemController@show');
+

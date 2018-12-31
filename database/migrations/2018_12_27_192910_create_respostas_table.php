@@ -23,8 +23,8 @@ class CreateRespostasTable extends Migration
             /*
             https://laravel.com/docs/5.7/eloquent-relationships#one-to-one-polymorphic-relations
             */
-            $table->integer('resposta_mae_id');
-            $table->string('resposta_mae_type');
+            $table->integer('respostavel_id');
+            $table->string('respostavel_type');
             $table->timestamps();
         });
     }

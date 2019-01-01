@@ -14,10 +14,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     /**
      * Show the application dashboard.
@@ -27,7 +27,7 @@ class HomeController extends Controller
     public function index()
     {
         $postagems = Postagem::orderBy('created_at','desc')->take(5)->get();
-        $users = User::all();
+        // $users = User::all();
         $temas = Tema::all();
         $postagemsMaisInteressantes = Postagem::orderBy('likes','desc')->take(5)->get();
 

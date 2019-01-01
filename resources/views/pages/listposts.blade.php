@@ -6,21 +6,9 @@
     <div id="top" class="row">
         <div class="col-md-3">
                 <h2>Publicações</h2>
-            </div>
-            
-            <div class="col-md-6">
-                <div class="input-group h2">
-                    <input name="data[search]" class="form-control" id="search" type="text" placeholder="Pesquisar publicações">
-                    <span class="input-group-btn">
-                        <button class="btn btn-primary" type="submit">
-                            <i class="material-icons">search</i>
-                        </button>
-                    </span>
-                </div>
-            </div>
-            
-            <div class="col-md-3">
-                <a href="add.html" class="btn btn-primary pull-right h2">Novo Item</a>
+                @auth
+                <a href="add.html" class="btn btn-primary pull-right h2">Novo Item</a>                    
+                @endauth            
         </div>   
     </div> <!-- /#top -->
 
@@ -44,18 +32,22 @@
                             <td>{{$postagem->id}}</td>
                             <td> 
                                 {{$postagem->titulopost}}
-                                <i class="material-icons">thumb_up</i>
+                                <i class="fa fa-thumbs-up"></i>
                                 {{$postagem->likes}} 
-                                <i class="material-icons">thumb_down</i>
+                                <i class="fa fa-thumbs-down"></i>
                                 {{$postagem->dislikes}}
                             </td>
                             <td>{{$postagem->tema->titulotema}}</td>
-                            <td>'@'{{$postagem->user->name}}</td>
+                            <td><i class="fa fa-user"></i>{{$postagem->user->name}}</td>
                             <td>{{$postagem->created_at}}</td>
                             <td class="actions">
-                                <a class="btn btn-success btn-xs" href="view.html">Visualizar</a>
-                                <a class="btn btn-warning btn-xs" href="edit.html">Editar</a>
-                                <a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
+                                <a class="btn btn-success btn-xs" href="{{$postagem->id}}">Visualizar</a>
+                                {{-- <a class="btn btn-warning btn-xs" href="edit.html">Editar</a> --}}
+                                @auth
+                                @if ($postagem->user->id == Auth::user()->id)
+                                <a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>                                                                        
+                                @endif
+                                @endauth
                             </td>
                         </tr>
                     @endforeach

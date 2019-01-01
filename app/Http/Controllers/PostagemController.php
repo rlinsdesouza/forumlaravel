@@ -38,7 +38,8 @@ class PostagemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->middleware('auth');
+        echo 'testando';
     }
 
     /**
@@ -103,6 +104,12 @@ class PostagemController extends Controller
         $temas = Tema::all();
 
         return view ('pages/listposts',compact('postagems','users','temas'));
+    }
+
+    public function buscanome (Request $request) {
+        $postagems = Postagem::where('titulopost','LIKE','%'.$request->input('busca').'%')->get();
+
+        return view ('pages/listposts',compact('postagems'));
     }
 
 }

@@ -2,23 +2,6 @@
 
 @section('content')
   <main role="main" class="container">
-    <div class="nav-scroller bg-white shadow-sm">
-      <nav class="nav nav-underline">
-        <a class="nav-link active" href="#">Dashboard</a>
-        <a class="nav-link" href="#">
-          Notificações
-          <span class="badge badge-pill bg-light align-text-bottom">27</span>
-        </a>
-        <a class="nav-link" href="#">Temas</a>
-        <a class="nav-link" href="#">Minhas postagens</a>
-        <a class="nav-link" href="#">Link</a>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-      </nav>
-    </div>
-
     <div class="my-3 p-3 bg-white rounded shadow-sm">
       <h6 class="border-bottom border-gray pb-2 mb-0">Postagens recentes</h6>
 
@@ -65,6 +48,80 @@
           <a href="#">All updates</a>
         </small>
       </div>
+
+      @auth    
+      <!--- \\\\\\\Post-->
+      <form action="postagens/criar" method="post">
+          @csrf
+          <div class="card gedf-card">
+              <div class="card-header">
+                  <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                      <li class="nav-item">
+                          <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab" aria-controls="posts" aria-selected="true">Fazer uma publicação</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" id="images-tab" data-toggle="tab" role="tab" aria-controls="images" aria-selected="false" href="#images">Anexar código github</a>
+                      </li>
+                  </ul>
+              </div>
+              <div class="card-body">
+                    <div class="tab-content" id="myTabContent">
+                      <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+                            <div class="input-group input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-sm">Título</span>
+                                    </div>
+                                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="titulo">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="inputGroupSelect01">Tema</label>
+                                    </div>
+                                    <select class="custom-select" id="inputGroupSelect01" name="tema">
+                                        <option selected>Escolha</option>
+                                        @foreach ($temas as $tema)
+                                            <option value="{{$tema->id}}">{{$tema->titulotema}}</option>
+                                        @endforeach
+                                    </select>  
+                            </div>
+                          <div class="form-group">
+                              <label class="sr-only" for="message">post</label>
+                              <textarea class="form-control" id="message" rows="3" placeholder="O que vc deseja publicar?"></textarea>
+                          </div>
+      
+                      </div>
+                      <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
+                          <div class="form-group">
+                              <div class="custom-file">
+                                  <input type="file" class="custom-file-input" id="customFile">
+                                  <label class="custom-file-label" for="customFile">Upload image</label>
+                              </div>
+                          </div>
+                          <div class="py-4"></div>
+                      </div>
+                  </div>
+                  <div class="btn-toolbar justify-content-between">
+                      <div class="btn-group">
+                          <button type="submit" class="btn btn-primary">Postar</button>
+                      </div>
+                      {{-- <div class="btn-group">
+                          <button id="btnGroupDrop1" type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                              aria-expanded="false">
+                              <i class="fa fa-globe"></i>
+                          </button>
+                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
+                              <a class="dropdown-item" href="#"><i class="fa fa-globe"></i> Public</a>
+                              <a class="dropdown-item" href="#"><i class="fa fa-users"></i> Friends</a>
+                              <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Just me</a>
+                          </div>
+                      </div> --}}
+                  </div>
+              </div>
+          </div>
+      </form>
+    <!-- Post /////-->
+    @endauth
+      
   </main>
 {{-- 
   <!-- Bootstrap core JavaScript

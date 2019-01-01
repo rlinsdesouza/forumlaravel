@@ -85,10 +85,14 @@
                 <div class="well">                
                     @foreach ($respostas as $resposta)
                         <h3><i class="fa fa-comment"></i> {{$resposta->user->name}} says:<small>{{$resposta->created_at}}</small></h3>
-                        <p>{{$resposta->resposta}}<button type="button" class="btn btn-primary btn-sm" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-reply"></i>Responder {{$resposta->user->name}}</button></p>    
+                        <p>{{$resposta->resposta}}</p>
+                        @auth
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-reply"></i>Responder {{$resposta->user->name}}</button>    
                             <div class="collapse" id="collapseExample">
                                 @yield('reply')
                             </div>
+                        @endauth
+                        
                         @foreach ($resposta->respostas as $resp)
                             <div class="col-sm-8">
                                 <div class="panel panel-default">
@@ -106,8 +110,11 @@
 
                 <hr>
 
+
                 <!-- the comment box -->
-                @yield('reply')
+                @auth
+                    @yield('reply')                    
+                @endauth
 
     
                     {{-- <script src="https://apis.google.com/js/plusone.js"></script> --}}
@@ -115,8 +122,8 @@
 
             </div>
 
-            <div class="col-lg-4">
-                <div class="well">
+            {{-- <div class="col-lg-4"> --}}
+                {{-- <div class="well">
                     <h4><i class="fa fa-search"></i> Blog Search...</h4>
                     <div class="input-group">
                         <input type="text" class="form-control">
@@ -127,7 +134,7 @@
                         </span>
                     </div>
                     <!-- /input-group -->
-                </div>
+                </div> --}}
                 {{-- <!-- /well -->
                 <div class="well">
                     <h4><i class="fa fa-tags"></i> Popular Tags:</h4>
@@ -218,7 +225,7 @@
 					</div>
 				
 	    </div> --}}
-            </div>                  
+            {{-- </div>                   --}}
         </div>	
     </div>
 

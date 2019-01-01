@@ -23,7 +23,8 @@ Route::resource('respostas','RespostaController');
 
 Route::get('/users/{id}/postagens','UserController@postagems');
 
-
+Route::post('/postagens/criar','PostagemController@store');
 Route::get('/postagens/listargeral','PostagemController@listageral');
+Route::get('/postagens/buscatitulo','PostagemController@buscanome');
 Route::get('/postagens/{id}','PostagemController@show');
 

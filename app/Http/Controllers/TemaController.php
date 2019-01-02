@@ -82,4 +82,34 @@ class TemaController extends Controller
     {
         //
     }
+
+    public function addtema(Request $request)
+    {
+        // validate
+        $this->middleware('auth');
+        $request->validate([
+            'titulotema'=>'required|max:191',
+            'descricaotema' => 'required'
+        ]);
+
+        //nova resposta resposta
+        $tema = new Tema();
+        $tema->titulotema = $request->titulotema;
+        $tema->descricaotema = $request->descricaotema;       
+        $tema->user_id = $request->user()->id;
+             
+
+        $tema->save();
+        
+        //set status message and redirect back to the form
+        $request->session()->flash('status', 'Adicionado tema');
+        return back();
+    }
+
+    public function cadastrotema()
+    {
+        // validate
+        $this->middleware('auth');
+        return view('pages/tema');
+    }
 }

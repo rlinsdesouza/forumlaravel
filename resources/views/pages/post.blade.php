@@ -6,19 +6,6 @@
 
 @extends('layouts.app')
 
-@section('reply')
-
-    <div class="well">
-        <h4><i class="fa fa-paper-plane-o"></i> Responder:</h4>
-        <form role="form">
-            <div class="form-group">
-                <textarea class="form-control" rows="3"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary"><i class="fa fa-reply"></i> Enviar</button>
-        </form>
-    </div>
-@endsection
-
 @section('content')
 
     <div class="container">
@@ -60,14 +47,30 @@
                 </div> --}}
                 
                 <hr>                
+                @auth
+                <p><h4>Útil?</h4></p>
+                <form action="addlike" method="post">
+                    @csrf
+                    <div>
+                        <button type="submit" class="btn btn-outline-info" name="like" value="{{$postagem->id}}"><i class="fa fa-thumbs-up"></i>{{$postagem->likes}}</button>
+                    </div>
+                </form>
+                <form action="addlike" method="post">
+                        @csrf
+                        <div>
+                            <button type="submit" class="btn btn-outline-danger" name="dislike" value="{{$postagem->id}}"><i class="fa fa-thumbs-down"></i>{{$postagem->dislikes}}</button>
+                        </div>
+                </form>
+                @else
+                    <div>
+                        <p><h4>Útil?</h4></p>
+                        <i class="fa fa-thumbs-up"></i>
+                        {{$postagem->likes}} 
+                        <i class="fa fa-thumbs-down"></i>
+                        {{$postagem->dislikes}}   
+                    </div>
+                @endauth
                 
-                <div>
-                    <p><h4>Útil?</h4></p>
-                    <i class="fa fa-thumbs-up"></i>
-                    {{$postagem->likes}} 
-                    <i class="fa fa-thumbs-down"></i>
-                    {{$postagem->dislikes}}   
-                </div>
 {{--                 
                 <!-- Helyezd el ezt a címkét az utolsó +1 gomb címke mögé. -->
                 <script type="text/javascript">
@@ -89,7 +92,16 @@
                         @auth
                             <button type="button" class="btn btn-primary btn-sm" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-reply"></i>Responder {{$resposta->user->name}}</button>    
                             <div class="collapse" id="collapseExample">
-                                @yield('reply')
+                                <div class="well">
+                                    <h4><i class="fa fa-paper-plane-o"></i> Responder:</h4>
+                                    <form action="addresposta" method="POST" role="form">
+                                        @csrf
+                                        <div class="form-group">
+                                            <textarea class="form-control" rows="3" name="resposta"></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary" name="idresposta" value="{{$resposta->id}}"><i class="fa fa-reply"></i> Enviar</button>
+                                    </form>
+                                </div>                    
                             </div>
                         @endauth
                         
@@ -113,7 +125,16 @@
 
                 <!-- the comment box -->
                 @auth
-                    @yield('reply')                    
+                    <div class="well">
+                        <h4><i class="fa fa-paper-plane-o"></i> Responder:</h4>
+                        <form action="addresposta" method="POST" role="form">
+                            @csrf
+                            <div class="form-group">
+                                <textarea class="form-control" rows="3" name="resposta"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary" name="idpostagem" value="{{$postagem->id}}"><i class="fa fa-reply"></i> Enviar</button>
+                        </form>
+                    </div>                    
                 @endauth
 
     

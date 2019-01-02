@@ -3,6 +3,11 @@
 @section('content')
 
 <div id="main" class="container">
+    @if (session('status'))
+        <div class="alert alert-success" role="alert">
+            {{ session('status') }}
+        </div>
+    @endif
     <div id="top" class="row">
         <div class="col-md-3">
                 <h2>Publicações</h2>
@@ -45,7 +50,7 @@
                                 {{-- <a class="btn btn-warning btn-xs" href="edit.html">Editar</a> --}}
                                 @auth
                                 @if ($postagem->user->id == Auth::user()->id)
-                                <a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>                                                                        
+                                <a class="btn btn-danger btn-xs"  href="postagens/excluir/{{$postagem->id}}" data-toggle="modal" data-target="#delete-modal">Excluir</a>                                                                        
                                 @endif
                                 @endauth
                             </td>

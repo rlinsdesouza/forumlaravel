@@ -23,8 +23,19 @@ Route::resource('respostas','RespostaController');
 
 Route::get('/users/{id}/postagens','UserController@postagems');
 
+Route::get('/temas','TemaController@cadastrotema');
+Route::post('/temas/add','TemaController@addtema');
+
+Route::post('/postagens/addresposta','RespostaController@addresposta');
+
 Route::post('/postagens/criar','PostagemController@store');
+Route::post('/postagens/addlike','PostagemController@addlike');
 Route::get('/postagens/listargeral','PostagemController@listageral');
 Route::get('/postagens/buscatitulo','PostagemController@buscanome');
 Route::get('/postagens/{id}','PostagemController@show');
+Route::get('/postagens/{id}/listar','PostagemController@listaporuser');
+Route::post('/postagens/excluir/{id}','PostagemController@excluir');
+
+
+
 

@@ -68,33 +68,32 @@
                     <div class="tab-content" id="myTabContent">
                       <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
                             <div class="input-group input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroup-sizing-sm">Título</span>
-                                    </div>
-                                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="titulo">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Título</span>
                                 </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <label class="input-group-text" for="inputGroupSelect01">Tema</label>
-                                    </div>
-                                    <select class="custom-select" id="inputGroupSelect01" name="tema">
-                                        <option selected>Escolha</option>
-                                        @foreach ($temas as $tema)
-                                            <option value="{{$tema->id}}">{{$tema->titulotema}}</option>
-                                        @endforeach
-                                    </select>  
+                                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="titulopost">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="inputGroupSelect01">Tema</label>
+                                </div>
+                                <select class="custom-select" id="inputGroupSelect01" name="tema">
+                                    <option selected value="escolha">Escolha</option>
+                                    @foreach ($temas as $tema)
+                                        <option value="{{$tema->id}}">{{$tema->titulotema}}</option>
+                                    @endforeach
+                                </select>  
                             </div>
                           <div class="form-group">
                               <label class="sr-only" for="message">post</label>
-                              <textarea class="form-control" id="message" rows="3" placeholder="O que vc deseja publicar?"></textarea>
+                              <textarea class="form-control" id="message" rows="3" placeholder="O que vc deseja publicar?" name="descricaopost"></textarea>
                           </div>
       
                       </div>
                       <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
                           <div class="form-group">
                               <div class="custom-file">
-                                  <input type="file" class="custom-file-input" id="customFile">
-                                  <label class="custom-file-label" for="customFile">Upload image</label>
+                                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="codegist" placeholder="Copie e cole o script gist aqui...">
                               </div>
                           </div>
                           <div class="py-4"></div>
@@ -119,6 +118,7 @@
               </div>
           </div>
       </form>
+
     <!-- Post /////-->
     @endauth
       

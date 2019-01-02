@@ -38,8 +38,27 @@ class PostagemController extends Controller
      */
     public function store(Request $request)
     {
+        
+        // validate
         $this->middleware('auth');
-        echo 'testando';
+        $request->validate([
+            'titulopost' => 'required|unique:postagems|max:191',
+            'tema'=>'different:escolha',
+            'descricaopost' =>'required'
+        ]);
+        //set up new postagem
+        $postagem = new Postagem();
+        $postagem->titulopost = $request->titulopost;    
+        $postagem->descricaopost = $request->descricaopost;
+        $postagem->likes = 0;
+        $postagem->dislikes = 0;
+        $postagem->tema_id = $request->tema;
+        $postagem->user_id = $request->user()->id;
+        $postagem->save();
+
+        //set status message and redirect back to the form
+        $request->session()->flash('status', 'Postagem salva');
+        return back();
     }
 
     /**
@@ -106,10 +125,49 @@ class PostagemController extends Controller
         return view ('pages/listposts',compact('postagems','users','temas'));
     }
 
+    public function listaporuser ($id) {
+        $postagems = User::find($id)->postagems;
+        return view ('pages/listposts',compact('postagems'));
+    }
+
     public function buscanome (Request $request) {
         $postagems = Postagem::where('titulopost','LIKE','%'.$request->input('busca').'%')->get();
 
         return view ('pages/listposts',compact('postagems'));
     }
 
+    public function addlike(Request $request)
+    {
+        // validate
+        $this->middleware('auth');
+
+        //update postagem
+        
+        if($request->has('like')) {
+            $postagem = Postagem::find($request->like);
+            $postagem->likes = $postagem->likes+1;
+        }else {
+            $postagem = Postagem::find($request->dislike);
+            $postagem->dislikes = $postagem->dislikes+1;
+        }
+        $postagem->save();
+        
+        //set status message and redirect back to the form
+        $request->session()->flash('status', 'Adicionado se foi útil');
+        return back();
+    }
+
+    public function excluir($id)
+    {
+        // validate
+        $this->middleware('auth');
+
+        //del postagem
+        $postagem = Postagem::destroy($id);
+
+        
+        //set status message and redirect back to the form
+        $request->session()->flash('status', 'Adicionado se foi útil');
+        return back();
+    }
 }

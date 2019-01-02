@@ -66,9 +66,8 @@
                                 Notificações
                                 <span class="badge badge-pill bg-light align-text-bottom">27</span>
                             </a>
-                            <a class="nav-link" href="#">Temas</a>
-                            <a class="nav-link" href="#">Minhas postagens</a>
-                            <a class="nav-link" href="#">Link</a>
+                            <a class="nav-link" href="temas">Temas</a>
+                            <a class="nav-link" href="postagens/{{Auth::user()->id}}/listar">Minhas postagens</a>
 
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -94,6 +93,20 @@
         </nav>
 
         <main class="py-4">
+            @if (session('status'))
+            <div class="alert alert-success" role="alert">
+                {{ session('status') }}
+            </div>
+            @endif
+            @if ($errors->any())
+            <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{$error}}</li>
+                @endforeach
+            </ul>
+            </div>
+            @endif
             @yield('content')
         </main>
     </div>

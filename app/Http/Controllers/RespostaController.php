@@ -82,4 +82,35 @@ class RespostaController extends Controller
     {
         //
     }
+
+    public function addresposta(Request $request)
+    {
+        // validate
+        $this->middleware('auth');
+        $request->validate([
+            'resposta' => 'required'
+        ]);
+
+        //nova resposta resposta
+        $resposta = new Resposta();
+        $resposta->resposta = $request->resposta;
+        $resposta->likes = 0;
+        $resposta->dislikes =0 ;
+        $resposta->user_id = $request->user()->id;
+     
+        if($request->has('idpostagem')) {
+            $resposta->respostavel_id = $request->idpostagem;
+            $resposta->respostavel_type = 'forum\Models\Postagem';
+        }else {
+            $resposta->respostavel_id = $request->idresposta;
+            $resposta->respostavel_type = 'forum\Models\Resposta';
+        }
+        
+
+        $resposta->save();
+        
+        //set status message and redirect back to the form
+        $request->session()->flash('status', 'Adicionado resposta');
+        return back();
+    }
 }

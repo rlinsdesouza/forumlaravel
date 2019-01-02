@@ -14,9 +14,9 @@
     <script src="js/offcanvas.js" defer></script>
     
 
-    {{-- <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/offcanvas.js') }}" defer></script>
-     --}}
+    
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -29,10 +29,10 @@
     <link href="css/app.css" rel="stylesheet">
     <link href="css/offcanvas.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
-{{-- 
+
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/offcanvas.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/custom.css') }}" rel="stylesheet"> --}}
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 
 </head>
 <body>

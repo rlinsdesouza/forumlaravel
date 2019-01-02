@@ -78,7 +78,7 @@
                                     <label class="input-group-text" for="inputGroupSelect01">Tema</label>
                                 </div>
                                 <select class="custom-select" id="inputGroupSelect01" name="tema">
-                                    <option selected value="escolha">Escolha</option>
+                                    <option value="escolha">Escolha</option>
                                     @foreach ($temas as $tema)
                                         <option value="{{$tema->id}}">{{$tema->titulotema}}</option>
                                     @endforeach

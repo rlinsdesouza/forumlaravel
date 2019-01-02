@@ -43,7 +43,7 @@ class PostagemController extends Controller
         $this->middleware('auth');
         $request->validate([
             'titulopost' => 'required|unique:postagems|max:191',
-            'tema'=>'different:escolha',
+            // 'tema'=>'different:escolha',
             'descricaopost' =>'required'
         ]);
         //set up new postagem

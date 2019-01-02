@@ -31,6 +31,6 @@ class HomeController extends Controller
         $temas = Tema::all();
         $postagemsMaisInteressantes = Postagem::orderBy('likes','desc')->take(5)->get();
 
-        return view ('pages/index',compact('postagems','users','temas','postagemsMaisInteressantes'));
+        return view ('pages/index',compact('postagems','temas','postagemsMaisInteressantes'));
     }
 }

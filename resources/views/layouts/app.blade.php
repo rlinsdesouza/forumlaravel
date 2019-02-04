@@ -48,7 +48,7 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <form class="form-inline my-2 my-lg-0" action="/forumlaravel/public/postagens/buscatitulo" method="GET">
+                    <form class="form-inline my-2 my-lg-0" action={{ url('/postagens/buscatitulo')}} method="GET">
                         @csrf
                         <input class="form-control mr-sm-2" type="text" placeholder="Procurar posts" aria-label="Search" name="busca">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
@@ -74,8 +74,8 @@
                                 Notificações
                                 <span class="badge badge-pill bg-light align-text-bottom">27</span>
                             </a>
-                            <a class="nav-link" href="temas">Temas</a>
-                            <a class="nav-link" href="postagens/{{Auth::user()->id}}/listar">Minhas postagens</a>
+                            <a class="nav-link" href="{{ url('/temas')}}">Temas</a>
+                            <a class="nav-link" href="{{ url('postagens/'.Auth::user()->id.'/listar')}}">Minhas postagens</a>
 
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

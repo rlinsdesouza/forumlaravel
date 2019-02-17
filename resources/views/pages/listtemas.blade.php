@@ -10,9 +10,9 @@
     @endif
     <div id="top" class="row">
         <div class="col-md-3">
-                <h2>Publicações</h2>
+                <h2>Temas</h2>
                 @auth
-                <a href="{{url('postagens/add')}}" class="btn btn-primary pull-right h2">Novo Item</a>                    
+                <a href={{url('temas/cadastro')}} class="btn btn-primary pull-right h2">Novo tema</a>                    
                 @endauth            
         </div>   
     </div> <!-- /#top -->
@@ -24,33 +24,27 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Título</th>
                         <th>Tema</th>
+                        <th>Descrição</th>
                         <th>Usuário</th>
                         <th>Data criação</th>
                         <th class="actions">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($postagems as $postagem)
+                    @foreach ($temas as $tema)
                         <tr>
-                            <td>{{$postagem->id}}</td>
-                            <td> 
-                                {{$postagem->titulopost}}
-                                <i class="fa fa-thumbs-up"></i>
-                                {{$postagem->likes}} 
-                                <i class="fa fa-thumbs-down"></i>
-                                {{$postagem->dislikes}}
-                            </td>
-                            <td>{{$postagem->tema->titulotema}}</td>
-                            <td><i class="fa fa-user"></i>{{$postagem->user->name}}</td>
-                            <td>{{$postagem->created_at}}</td>
+                            <td>{{$tema->id}}</td>
+                            <td>{{$tema->titulotema}}</td>
+                            <td>{{$tema->descricaotema}}</td>
+                            <td><i class="fa fa-user"></i>{{$tema->user->name}}</td>
+                            <td>{{$tema->created_at}}</td>
                             <td class="actions">
-                                <a class="btn btn-success btn-xs" href="{{url('postagens/'.$postagem->id)}}">Visualizar</a>
+                                <a class="btn btn-success btn-xs" href="{{url('temas/'.$tema->id)}}">Visualizar</a>
                                 {{-- <a class="btn btn-warning btn-xs" href="edit.html">Editar</a> --}}
                                 @auth
-                                @if ($postagem->user->id == Auth::user()->id)
-                                <a class="btn btn-danger btn-xs"  href="{{url('postagens/excluir/'.$postagem->id)}}" data-toggle="modal" data-target="#delete-modal">Excluir</a>                                                                        
+                                @if ($tema->user->id == Auth::user()->id)
+                                <a class="btn btn-danger btn-xs"  href="{{url('temas/excluir/'.$tema->id)}}" data-toggle="modal" data-target="#delete-modal">Excluir</a>                                                                        
                                 @endif
                                 @endauth
                             </td>

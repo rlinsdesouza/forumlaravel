@@ -3,6 +3,8 @@
 namespace forum\Http\Controllers;
 
 use forum\Models\Tema;
+use forum\User;
+
 use Illuminate\Http\Request;
 
 class TemaController extends Controller
@@ -44,9 +46,10 @@ class TemaController extends Controller
      * @param  \forum\Models\Tema  $tema
      * @return \Illuminate\Http\Response
      */
-    public function show(Tema $tema)
+    public function show($id)
     {
-        //
+        $tema = Tema::find($id);
+        return view ('pages/tema',['tema'=>$tema]);
     }
 
     /**
@@ -111,5 +114,35 @@ class TemaController extends Controller
         // validate
         $this->middleware('auth');
         return view('pages/tema');
+    }
+
+    public function listageral () {
+        $temas = Tema::all();
+        $users = User::all();
+        
+        return view ('pages/listtemas',compact('temas','users'));
+    }
+    public function listaporuser ($id) {
+        $temas = User::find($id)->temas;
+        return view ('pages/listtemas',compact('temas'));
+    }
+
+    public function buscatema (Request $request) {
+        $temas = Tema::where('titulotema','LIKE','%'.$request->input('busca').'%')->get();
+        return view ('pages/listtemas',compact('temas'));
+    }
+
+    public function excluir($id)
+    {
+        // validate
+        $this->middleware('auth');
+
+        //del tema
+        $tema = Tema::destroy($id);
+
+        
+        //set status message and redirect back to the form
+        $request->session()->flash('status', 'removido com sucesso');
+        return back();
     }
 }

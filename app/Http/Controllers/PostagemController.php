@@ -94,16 +94,10 @@ class PostagemController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \forum\Models\Postagem  $postagem
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Postagem $postagem)
+    public function add()
     {
-        //
+        $temas = Tema::all();
+        return view ('pages/postadd',['temas'=>$temas]);
     }
 
     /**
@@ -131,7 +125,12 @@ class PostagemController extends Controller
     }
 
     public function buscanome (Request $request) {
-        $postagems = Postagem::where('titulopost','LIKE','%'.$request->input('busca').'%')->get();
+        // https://laracasts.com/discuss/channels/eloquent/how-to-use-where-conditions-for-relations-column?page=1
+        // https://github.com/laravel/framework/issues/12112
+        $postagems = Postagem::where('titulopost','LIKE','%'.$request->input('busca').'%')
+                            ->orWhereHas('tema', function ($query) use ($request) {
+                                $query->where('titulotema','LIKE','%'.$request->input('busca').'%');
+                            })->get();
 
         return view ('pages/listposts',compact('postagems'));
     }

@@ -5,6 +5,7 @@ namespace forum\Http\Controllers\Auth;
 use forum\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+
 class LoginController extends Controller
 {
     /*

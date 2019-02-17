@@ -7,6 +7,8 @@ use forum\Models\Postagem;
 use forum\User;
 use forum\Models\Tema;
 
+use Illuminate\Support\Facades\Auth;
+
 class HomeController extends Controller
 {
     /**
@@ -26,6 +28,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if (Auth::user()){
+            setcookie("oldUser",Auth::user()->email,time()+36000);
+        }
         $postagems = Postagem::orderBy('created_at','desc')->take(5)->get();
         // $users = User::all();
         $temas = Tema::all();

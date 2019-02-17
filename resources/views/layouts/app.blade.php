@@ -10,7 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="js/app.js" defer></script>
+    {{-- <script src="js/app.js" defer></script> --}}
     <script src="js/offcanvas.js" defer></script>
     
 

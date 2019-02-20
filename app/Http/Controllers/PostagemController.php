@@ -156,17 +156,17 @@ class PostagemController extends Controller
         return back();
     }
 
-    public function excluir($id)
+    public function excluir(Request  $request)
     {
         // validate
         $this->middleware('auth');
 
         //del postagem
-        $postagem = Postagem::destroy($id);
+        $postagem = Postagem::destroy($request->id);
 
         
         //set status message and redirect back to the form
-        $request->session()->flash('status', 'Adicionado se foi útil');
+        $request->session()->flash('status', 'Excluído com sucesso!');
         return back();
     }
 }

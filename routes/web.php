@@ -29,7 +29,7 @@ Route::get('/temas/listargeral','TemaController@listageral');
 Route::get('/temas/buscatema','TemaController@buscatema');
 Route::get('/temas/{id}','TemaController@show');
 Route::get('/temas/{id}/listar','TemaController@listaporuser');
-Route::post('/temas/excluir/{id}','TemaController@excluir');
+Route::post('/temas/excluir','TemaController@excluir');
 
 Route::post('/postagens/addresposta','RespostaController@addresposta');
 
@@ -40,7 +40,7 @@ Route::get('/postagens/listargeral','PostagemController@listageral');
 Route::get('/postagens/buscatitulo','PostagemController@buscanome');
 Route::get('/postagens/{id}','PostagemController@show');
 Route::get('/postagens/{id}/listar','PostagemController@listaporuser');
-Route::post('/postagens/excluir/{id}','PostagemController@excluir');
+Route::post('/postagens/excluir','PostagemController@excluir');
 
 
 

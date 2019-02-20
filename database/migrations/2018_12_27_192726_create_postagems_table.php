@@ -20,9 +20,9 @@ class CreatePostagemsTable extends Migration
             $table->integer('likes');
             $table->integer('dislikes');
             $table->integer('tema_id')->unsigned();
-            $table->foreign('tema_id')->references('id')->on('temas');
+            $table->foreign('tema_id')->references('id')->on('temas')->onDelete('cascade');
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');                       
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');                       
             $table->timestamps();
         });
     }

@@ -3,11 +3,6 @@
 @section('content')
 
 <div id="main" class="container">
-    @if (session('status'))
-        <div class="alert alert-success" role="alert">
-            {{ session('status') }}
-        </div>
-    @endif
     <div id="top" class="row">
         <div class="col-md-3">
                 <h2>Publicações</h2>
@@ -50,7 +45,12 @@
                                 {{-- <a class="btn btn-warning btn-xs" href="edit.html">Editar</a> --}}
                                 @auth
                                 @if ($postagem->user->id == Auth::user()->id)
-                                <a class="btn btn-danger btn-xs"  href="{{url('postagens/excluir/'.$postagem->id)}}" data-toggle="modal" data-target="#delete-modal">Excluir</a>                                                                        
+                                <form action="{{url('postagens/excluir')}}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{$postagem->id}}">
+                                    <a class="btn btn-danger btn-xs"  data-toggle="modal" data-target="#delete-modal">Excluir</a>                                                                        
+                                    @include('pages/modalconfirm')
+                                </form>
                                 @endif
                                 @endauth
                             </td>
@@ -75,22 +75,6 @@
         </div>
     </div> <!-- /#bottom --> --}}
 
-    <!-- Modal -->
-    <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="modalLabel">Excluir Item</h4>
-                </div>
-                <div class="modal-body">Deseja realmente excluir este item? </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Sim</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">N&atilde;o</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
 </div>  <!-- /#main -->
     

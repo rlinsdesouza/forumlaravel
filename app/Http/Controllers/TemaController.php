@@ -132,17 +132,17 @@ class TemaController extends Controller
         return view ('pages/listtemas',compact('temas'));
     }
 
-    public function excluir($id)
+    public function excluir(Request $request)
     {
         // validate
         $this->middleware('auth');
 
         //del tema
-        $tema = Tema::destroy($id);
+        $tema = Tema::destroy($request->id);
 
         
         //set status message and redirect back to the form
-        $request->session()->flash('status', 'removido com sucesso');
+        $request->session()->flash('status', 'Tema removido com sucesso');
         return back();
     }
 }

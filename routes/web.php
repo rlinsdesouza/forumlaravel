@@ -28,6 +28,7 @@ Route::post('/temas/add','TemaController@addtema');
 Route::get('/temas/listargeral','TemaController@listageral');
 Route::get('/temas/buscatema','TemaController@buscatema');
 Route::get('/temas/{id}','TemaController@show');
+Route::post('/temas/editar/{id}','TemaController@update');
 Route::get('/temas/{id}/listar','TemaController@listaporuser');
 Route::post('/temas/excluir','TemaController@excluir');
 

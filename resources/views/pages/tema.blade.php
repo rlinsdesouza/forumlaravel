@@ -6,7 +6,11 @@
     <h1>Cadastro de Tema</h1>
 
 
+    @if(!isset($tema)) 
     <form action="{{url('temas/add')}}" method="POST">
+    @else
+    <form action="{{url('temas/editar/'.$tema->id)}}" method="POST">
+    @endif    
     @csrf
         <div class="form-group">
         <label for="exampleFormControlInput1">Título</label>
@@ -19,13 +23,16 @@
         <div class="form-group">
         <label for="exampleFormControlTextarea1">Descrição tema</label>
         @if(isset($tema))
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="descricaotema" value="{{$tema->descricaotema}}"></textarea>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="descricaotema">{{$tema->descricaotema}}</textarea>
         @else 
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="descricaotema"></textarea>
         @endif
         </div>
         @if(!isset($tema))
         <button class="btn btn-primary" type="submit">Salvar</button>
+        @endif
+        @if (isset($tema) && (Auth::user()!=null)  && $tema->user->id == Auth::user()->id)
+        <button class="btn btn-primary" type="submit">Editar</button>        
         @endif
     </form>
 </div>

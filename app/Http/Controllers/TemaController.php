@@ -63,16 +63,27 @@ class TemaController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \forum\Models\Tema  $tema
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Tema $tema)
+
+    public function update(Request $request, $id)
     {
-        //
+        $this->middleware('auth');
+        $request->validate([
+            'titulotema'=>'required|max:191',
+            'descricaotema' => 'required'
+        ]);
+
+        //nova resposta resposta
+        $tema = Tema::find($id);
+        $tema->titulotema = $request->titulotema;
+        $tema->descricaotema = $request->descricaotema;       
+        $tema->user_id = $request->user()->id;
+             
+
+        $tema->save();
+        
+        //set status message and redirect back to the form
+        $request->session()->flash('status', 'Alterado tema');
+        return back();
     }
 
     /**
